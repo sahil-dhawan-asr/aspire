@@ -29,6 +29,25 @@ You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you
 
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
+## About Assignment
+Steps For setup/Installation
+1) Clone this repository at local.
+2) Execute composer install, This will install dependencies required.
+3) Rename .env.example to .env or copy .env.example and then rename to .env .
+4) Setup your database credentials in .env file. 
+5) Execute command php artisan migrate
+6) Execute php artisan db:seed this will create default admin credentials with email : adminaspire@mailinator.com and password: 12345678
+7) Execute php artisan passport:install  Artisan command. This command will create the encryption keys needed to generate secure access tokens.
+8) Start server using php artisan:serve command.
+
+## Assignment Summary
+Here i've made 2 roles one is Customer other one is Admin,Customer can register itself using create-customer api.Customer will be able to apply for new loan,view all loans,view individual loans and repayment.
+Admin can approve pending loans,Logout,Login is common for both users.Here Passport is used for authentication purposes and different roles have different scopes.
+Traits are used with validations implemented in trait which are used in controllers.Same for sending response separate trait is used to pass response.
+Policy implemented in order to ensure that user can access his loan only. 
+
+
+
 ## Laravel Sponsors
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).

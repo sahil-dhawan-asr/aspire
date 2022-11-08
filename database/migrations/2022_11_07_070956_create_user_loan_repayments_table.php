@@ -23,6 +23,8 @@ return new class extends Migration
             $table->decimal('amount_left', $precision = 8, $scale = 2)->default(0);
             $table->enum("status",["pending","paid"])->default("pending");
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_loan_id')->references('id')->on('user_loans')->onDelete('cascade');
         });
     }
 
