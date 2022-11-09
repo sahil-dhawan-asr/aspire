@@ -14,7 +14,7 @@ class CustomerTest extends TestCase
 
      /** Checking Function To Create Customer Whether Create Customer Is Working Or Not */
 
-    public function test_create_customer_can_be_reached()
+    public function test_create_customer_can_be_registered()
     {
         
         $response = $this->post('/api/create-customer',["email"=>"s2@mailinator.com","password"=>"12345678","name"=>"Sample"]);

@@ -2,7 +2,7 @@
 
 return [
     "customerRegistered" =>"Customer registered successfully.",
-    "invalidEmailPassword" =>"Invalid username/password.",
+    "invalidEmailPassword" =>"Invalid email/password.",
     "loginSuccess" =>"User logged in successfully.",
     "loanCreated" => "Loan request submitted successfully and is under review.",
     "loanPending" => "Your request for loan is pending you can't apply for new loan.",

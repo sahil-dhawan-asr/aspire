@@ -10,12 +10,37 @@ use Illuminate\Http\Response;
 use App\Http\Traits\ValidationsTrait;
 use App\Http\Traits\ApiResponseTrait;
 
- /**
- * @OA\Info(
- *     version="1.0",
- *     title="Example for response examples value"
- * )
- */
+/**
+     * @OA\Info(
+     *      version="1.0.0",
+     *      title="Aspire Systems",
+     *      description="Implementation of Loan System API's",
+     *      @OA\Contact(
+     *          email="sahildhawan74@gmail.com"
+     *      ),
+     *      @OA\License(
+     *          name="Apache 2.0",
+     *          url="http://www.apache.org/licenses/LICENSE-2.0.html"
+     *      )
+     * )
+     *
+     * @OA\Server(
+     *      url=L5_SWAGGER_CONST_HOST,
+     *      description="Demo API Server"
+     * )
+
+     *
+     *
+
+    * @OA\SecurityScheme(
+    * securityScheme="bearerAuth",
+    * in="header",
+    * name="bearerAuth",
+    * type="http",
+    * scheme="bearer"
+    * )
+
+    */
 
 class Controller extends BaseController
 {

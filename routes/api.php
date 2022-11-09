@@ -14,14 +14,14 @@ use App\Http\Controllers\Api\CustomerLoanController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-
-Route::post("/create-customer",[UsersController::class,'createCustomer']);
+/**Common Routes */
 Route::post("/login",[UsersController::class,'login']);
+Route::post('/logout',[UsersController::class,'logout'])->middleware(["auth:api"]);
+/**End Common Routes */
+
+
+/**Customer Specific Routes */
+Route::post("/create-customer",[UsersController::class,'createCustomer']);
 Route::post("/create-loan",[CustomerLoanController::class,'createLoan'])
 ->middleware(['auth:api', 'scope:create-loan,view-loan,add-repayment,view-all-own-loans']);
 Route::get("/view-all-own-loans/{type?}",[CustomerLoanController::class,'viewLoans'])
@@ -30,7 +30,10 @@ Route::get("/view-loan/{id}",[CustomerLoanController::class,'viewLoan'])
 ->middleware(['auth:api', 'scope:create-loan,view-loan,add-repayment,view-all-own-loans']);
 Route::post("/add-repayment",[CustomerLoanController::class,'addRepayment'])
 ->middleware(['auth:api', 'scope:create-loan,view-loan,add-repayment,view-all-own-loans']);
+/**End of customer specific routes */
+
+
 /**Admin Specific Routes */
-Route::post("/approve-loan",[CustomerLoanController::class,'approveLoan'])
+Route::patch("/approve-loan",[CustomerLoanController::class,'approveLoan'])
 ->middleware(['auth:api', 'scope:approve-loan,view-all-loans']);
-Route::post('/logout',[UsersController::class,'logout'])->middleware(["auth:api"]);
+/**End of Admin Specific Routes */

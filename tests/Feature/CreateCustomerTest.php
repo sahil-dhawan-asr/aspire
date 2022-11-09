@@ -31,7 +31,7 @@ class CreateCustomerTest extends TestCase
         $token = $user->createToken("sample",["view-loan"])->accessToken;
         $headers = [ 'Authorization' => 'Bearer '.$token,'Accept'=>'application/json'];
         $response = $this->getjson('/api/view-all-own-loans', [], $headers);
-        $response->assertStatus(403); // Checking For Failure when Failure Happens Then This Will Pass
+        $response->assertStatus(403); // Checking For Failure when Failure Happens Then This Will Pass as we are passing sample data
     }
 
     

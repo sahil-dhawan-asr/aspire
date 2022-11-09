@@ -19,12 +19,46 @@ class UsersController extends Controller
     public function __construct(){
         $this->userObj = new User;
     }
-    /** @OA\Get(
-        *     path="/api/users",
-        *     @OA\Response(response="200", description="An example endpoint")
+    /** @OA\Post(
+        *     path="/create-customer",
+        *     tags={"Create-Customer"},
+        *     description="Register New Customer",
+        *      operationId="createCustomer",
+        *      summary="Register a new cutomer",
+        *      security={{"passport": {}}},
+        *   @OA\Parameter(
+        *      name="name",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="string"
+        *      )
+        *   ),
+        *   @OA\Parameter(
+        *      name="email",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="string"
+        *      )
+        *   ),
+        *   @OA\Parameter(
+        *      name="password",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="string"
+        *      )
+        *   ),
+        *     @OA\Response(response="200", description="Customer registered successfully."),
+        *   @OA\Response(
+        *      response=400,
+        *      description="The email has already been taken. , The email must be a valid email address.,The password must be at least 6 characters."
+        *   ),
         * )
         */
-    /**Api For Creating Customer with name,email,password parameters. Here Validation is performed using ValidationsTrait and for response ApiResponse Trait is Used  */
+    /**Api For Creating Customer with name,email,password parameters. 
+     * Here Validation is performed using ValidationsTrait and for response ApiResponse Trait is Used  */
     public function createCustomer(Request $request){
         $response = $this->validateCustomer($request->all());  //From ValidationsTrait
         
@@ -40,6 +74,42 @@ class UsersController extends Controller
         return $this->sendResponse($status,$this->message);
     }
     /** Function For Logging in For Admin/Customer */
+/**
+    * @OA\Post(
+    *     path="/login",
+    *     tags={"Login"},
+    *     summary="Login a user to get token",
+    *     operationId="login",
+    *       @OA\Parameter(
+    *          name="email",
+    *          description="Email",
+    *          required=true,
+    *          in="query",
+    *          @OA\Schema(
+    *              type="string"
+    *          )
+    *      ),
+    *       @OA\Parameter(
+    *          name="password",
+    *          description="Password",
+    *          required=true,
+    *          in="query",
+    *          @OA\Schema(
+    *              type="string"
+    *          )
+    *      ),
+    *     @OA\Response(
+    *          response=200,
+    *          description="User logged in successfully."
+    *       ),
+    *     @OA\Response(
+    *         response=400,
+    *         description="The email field is required,The password field is required,The email must be a valid email address,Invalid email/password."
+    *     ),
+    *     @OA\Response(response=403, description="Unauthenticated"),
+    * )
+    */
+
     public function login(Request $request){
         $response = $this->validateUserDetails($request->all());  //From ValidationsTrait
         $this->checkResponse($response);
@@ -54,7 +124,22 @@ class UsersController extends Controller
         
         return $this->sendResponse($this->success,__("messages.loginSuccess"),$this->prepareApiResponseForUser($userDetails));
     }
-
+/**
+    * @OA\Post(
+    *      path="/logout",
+    *      operationId="logout",
+    *      security={{"bearerAuth":{}}},
+    *      tags={"Users"},
+    *      summary="This Api logout user",
+    *      description="To Logout user",
+    *      @OA\Response(response=200,description="User logged out successfully",
+    *      @OA\MediaType(mediaType="application/json")),
+    *      @OA\Response(response=401,description="Unauthenticated."),
+    *      @OA\Response(response=400,description="Invalid request"),
+    *      @OA\Response(response=404,description="not found"),
+    *
+    * )
+    */
     public function logout(Request $request){
         Auth::user()->token()->revoke();
         return $this->sendResponse($this->success,__("messages.logoutSuccess"));

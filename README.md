@@ -39,6 +39,8 @@ Steps For setup/Installation
 6) Execute php artisan db:seed this will create default admin credentials with email : adminaspire@mailinator.com and password: 12345678
 7) Execute php artisan passport:install  Artisan command. This command will create the encryption keys needed to generate secure access tokens.
 8) Start server using php artisan:serve command.
+9) Open Annotation is added and i've given static path for demo api server in l5-swagger.php, one can change as per preference.
+10) Api can be accessed via endpoint /api/documentation. e.g in this case http://127.0.0.1:8000/api/documentation
 
 ## Assignment Summary
 Here i've made 2 roles one is Customer other one is Admin,Customer can register itself using create-customer api.Customer will be able to apply for new loan,view all loans,view individual loans and repayment.
